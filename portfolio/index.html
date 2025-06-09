@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jayant Parihar | Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      /* Default Blue theme colors */
+      --primary-color: #0073e6;
+      --bg-color: #f4f4f4;
+      --text-color: #333;
+      --header-bg: #000;
+      --card-bg: #fff;
+      --hover-color: var(--primary-color);
+    }
+    [data-theme="dark"] {
+      --bg-color: #121212;
+      --text-color: #eee;
+      --header-bg: #1f1f1f;
+      --card-bg: #1e1e1e;
+      --hover-color: var(--primary-color);
+    }
+    /* Color themes */
+    [data-color="blue"] {
+      --primary-color: #0073e6;
+      --hover-color: #0073e6;
+    }
+    [data-color="green"] {
+      --primary-color: #2ecc71;
+      --hover-color: #27ae60;
+    }
+    [data-color="purple"] {
+      --primary-color: #9b59b6;
+      --hover-color: #8e44ad;
+    }
+    [data-color="red"] {
+      --primary-color: #e74c3c;
+      --hover-color: #c0392b;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      background: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      animation: fadeIn 1s ease-in;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    header {
+      background: var(--header-bg);
+      color: #fff;
+      padding: 2rem 1rem 4rem; /* bottom padding increased for controls */
+      text-align: center;
+      animation: slideDown 1s ease-out;
+      position: relative;
+    }
+    @keyframes slideDown {
+      from {
+        transform: translateY(-50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    /* Theme & color selectors container */
+    .theme-controls {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      max-width: 280px;
+    }
+    /* Buttons style */
+    .theme-toggle,
+    .color-btn {
+      background: var(--card-bg);
+      color: var(--text-color);
+      padding: 0.4rem 0.8rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .color-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      padding: 0;
+      border: 2px solid transparent;
+      flex-shrink: 0;
+    }
+    /* Color button backgrounds */
+    .color-btn.blue {
+      background-color: #0073e6;
+    }
+    .color-btn.green {
+      background-color: #2ecc71;
+    }
+    .color-btn.purple {
+      background-color: #9b59b6;
+    }
+    .color-btn.red {
+      background-color: #e74c3c;
+    }
+    /* Highlight selected color */
+    .color-btn.selected {
+      border-color: #fff;
+      box-shadow: 0 0 8px 2px rgba(255, 255, 255, 0.8);
+    }
+    /* Hover effect */
+    .theme-toggle:hover,
+    .color-btn:hover {
+      filter: brightness(1.1);
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.3rem;
+    }
+    header p {
+      font-size: 1.2rem;
+      animation: fadeIn 2s ease-in;
+    }
+    section {
+      padding: 2rem 1rem;
+      max-width: 900px;
+      margin: auto;
+      animation: fadeInUp 1s ease-in;
+    }
+    @keyframes fadeInUp {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    h2 {
+      margin-bottom: 1rem;
+      color: var(--text-color);
+    }
+    .skills ul,
+    .projects ul {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 1rem;
+      list-style: none;
+      animation: fadeInUp 1s ease-in;
+    }
+    .skills li,
+    .projects li {
+      background: var(--card-bg);
+      padding: 0.8rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .skills li:hover,
+    .projects li:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 12px rgba(var(--primary-color-rgb, 0, 115, 230), 0.3);
+    }
+    .contact a {
+      color: var(--text-color);
+      text-decoration: none;
+      display: block;
+      margin: 0.5rem 0;
+      transition: color 0.3s;
+    }
+    .contact a:hover {
+      color: var(--hover-color);
+    }
+    footer {
+      background: #111;
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      animation: fadeIn 2s ease-in;
+    }
+    .profile-pic {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      margin: 1rem auto;
+      border: 3px solid #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      animation: bounceIn 1s ease-in-out;
+    }
+    @keyframes bounceIn {
+      0% {
+        transform: scale(0.5);
+        opacity: 0;
+      }
+      60% {
+        transform: scale(1.1);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="theme-controls" aria-label="Theme and color controls">
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle light and dark theme">
+        Toggle Theme
+      </button>
+      <button class="color-btn blue" aria-label="Blue theme" title="Blue theme" onclick="setColor('blue')"></button>
+      <button class="color-btn green" aria-label="Green theme" title="Green theme" onclick="setColor('green')"></button>
+      <button class="color-btn purple" aria-label="Purple theme" title="Purple theme" onclick="setColor('purple')"></button>
+      <button class="color-btn red" aria-label="Red theme" title="Red theme" onclick="setColor('red')"></button>
+    </div>
+
+    <img
+      src="WhatsApp Image 2025-06-04 at 10.47.47_d1db0d86.jpg"
+      alt="Jayant Parihar"
+      class="profile-pic"
+    />
+    <h1>Jayant Parihar</h1>
+    <p>Creative Web Developer | UI/UX Designer | Graphic Artist</p>
+  </header>
+
+  <section class="about">
+    <h2>About Me</h2>
+    <p>
+      I am currently pursuing MCA and specialize in front-end development, UI/UX design, and multimedia editing. I am passionate about creating visually
+      engaging and user-friendly digital experiences.
+    </p>
+  </section>
+
+  <section class="skills">
+    <h2>Skills</h2>
+    <ul>
+      <li>HTML/CSS</li>
+      <li>JavaScript</li>
+      <li>React.js</li>
+      <li>Figma</li>
+      <li>Adobe Photoshop</li>
+      <li>Premiere Pro</li>
+      <li>Git & GitHub</li>
+      <li>Responsive Design</li>
+    </ul>
+  </section>
+
+  <section class="projects">
+    <h2>Projects</h2>
+    <ul>
+      <li>Portfolio Website (This site!)</li>
+      <li>UI Redesign (Figma)</li>
+      <li>Blog Web App (React + API)</li>
+      <li>Promotional Video Edits</li>
+    </ul>
+  </section>
+
+  <section class="contact">
+    <h2>Contact</h2>
+    <a href="mailto:jayantparihar876@gmail.com">jayantparihar876@gmail.com</a>
+    <a href="https://linkedin.com/in/jayant-parihar-042677264" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    <a href="http://t.me/jayant_Parihar" target="_blank" rel="noopener noreferrer">Telegram</a>
+    <a href="CV - Jayant  parihar (3).pdf" download>Download Resume</a>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Jayant Parihar. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      const body = document.body;
+      if (body.getAttribute('data-theme') === 'dark') {
+        body.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'light');
+      } else {
+        body.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+      }
+    }
+
+    function setColor(color) {
+      document.body.setAttribute('data-color', color);
+      localStorage.setItem('color', color);
+      highlightSelectedColor(color);
+    }
+
+    function highlightSelectedColor(color) {
+      document.querySelectorAll('.color-btn').forEach((btn) => {
+        btn.classList.toggle('selected', btn.classList.contains(color));
+      });
+    }
+
+    // Load saved preferences
+    window.onload = () => {
+      const savedTheme = localStorage.getItem('theme');
+      const savedColor = localStorage.getItem('color') || 'blue';
+
+      if (savedTheme === 'dark') {
+        document.body.setAttribute('data-theme', 'dark');
+      } else {
+        document.body.removeAttribute('data-theme');
+      }
+      document.body.setAttribute('data-color', savedColor);
+      highlightSelectedColor(savedColor);
+    };
+  </script>
+</body>
+</html>
